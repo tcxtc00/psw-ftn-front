@@ -1,0 +1,68 @@
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .form-container .title{
+      margin-top: 12px;
+  }
+
+
+
+  form{
+      background-color: white;
+      padding: 0px 60px;
+      border-radius: 10px;
+      border:var(--border);
+      border-radius: .5rem;
+      box-shadow: var(--box-shadow);
+      width: 50%;
+  }
+  
+  h1{
+      color: var(--green);
+      text-align: center;
+  }
+  
+  button{
+      width: 100%;
+      height: 50px;
+      padding: 10px;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 15px;
+      margin-bottom: 30px;
+  }
+
+  .span-login-signup {
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: inline;
+    font-weight: bold;
+    color:var(--green);
+  }  
+
+  p{
+    font-size: 1.5rem;
+    color:var(--light-color);
+    line-height: 1.8;
+    padding: 1rem 0;
+  }
+
+  .dropdown-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 6rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  

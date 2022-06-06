@@ -1,0 +1,67 @@
+.grid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+.grid-container > form {
+    flex:1 1 45rem;
+    width: 100%;
+    background: #fff;
+    border:var(--border);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    padding: 2rem;
+    border-radius: .5rem;
+}
+
+.grid-container > form > h3{
+    color:var(--black);
+    padding-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.grid-container > form .box{
+    width: 100%;
+    margin:.7rem 0;
+    border-radius: .5rem;
+    border:var(--border);
+    font-size: 1.6rem;
+    color: var(--black);
+    text-transform: none;
+    padding: 1rem;
+}
+
+.grid-container > form .btn{
+    padding:1rem 4rem;
+}
+
+.grid-container > div > h3{
+    color:var(--black);
+    padding-bottom: 1rem;
+    font-size: 1.7rem;
+}
+
+.heading-checkup{
+    font-size: 4rem;
+    margin-top: 5rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    text-shadow: var(--text-shadow);
+    text-transform: uppercase;
+    color:var(--black);
+    letter-spacing: .4rem;
+    margin-top: 100px;
+}
+
+.heading-checkup span{
+    font-size: 4rem;
+    display: inline;
+    text-transform: uppercase;
+    color:var(--green);
+}
+
+
