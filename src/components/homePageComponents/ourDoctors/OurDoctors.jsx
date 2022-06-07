@@ -1,13 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import './ourDoctors.css'
 import Slider from 'react-slick'
-import placeholder from '../../../assets/user-placeholder.png'
-import doctor1 from '../../../assets/doc-1.jpg'
-import doctor2 from '../../../assets/doc-2.jpg'
-import doctor3 from '../../../assets/doc-3.jpg'
-import doctor4 from '../../../assets/doc-4.jpg'
-import doctor5 from '../../../assets/doc-5.jpg'
-import doctor6 from '../../../assets/doc-6.jpg'
+import placeholderImg from '../../../assets/user-placeholder.png'
+
 
 import { checkUpService } from '../../../api/CheckupService'
 
@@ -80,7 +75,7 @@ const OurDoctors = () => {
           <Slider {...settings}>
             {doctors.map((doctor) => (
               <div className="box" key={doctor.id}>
-                <img src={placeholder} alt="" />
+              {doctor.imageUrl !== null ? <img src={doctor.imageUrl} alt="" /> : <img src={placeholderImg} alt="" />}
                 <h3>{doctor.firstName} {doctor.lastName}</h3>
                 <span className="expertise-span">{doctor.expertise}</span>
                 <div className="share">

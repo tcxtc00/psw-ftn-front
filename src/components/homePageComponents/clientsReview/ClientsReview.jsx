@@ -1,58 +1,15 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './clientsReview.css'
 import placeholderImg from '../../../assets/user-placeholder.png'
 
-const ClientsReview = () => {
-  const reviews = [
-    {
-      id: 0,
-      name: 'Petar Petrovic',
-    },
-    {
-      id: 1,
-      name: 'Miodrag Bojanic',
-    },
-    {
-      id: 2,
-      name: 'Mitar Miric',
-    },
-    {
-      id: 3,
-      name: 'Dusko Simic',
-    },
-    {
-      id: 4,
-      name: 'Garry Medel',
-    },
-    {
-      id: 5,
-      name: 'Shon Dyiche',
-    },
-  ]
+import {feedbackService} from '../../../api/FeedbackService'
 
-  const grades = [
-    {
-      grade: 0,
-    },
-    {
-      grade: 1,
-    },
-    {
-      grade: 2,
-    },
-    {
-      grade: 3,
-    },
-    {
-      grade: 4,
-    },
-    {
-      grade: 5,
-    },
-  ]
+const ClientsReview = () => {
+
+  const [reviews, setReviews] = useState([]);
 
   const settings = {
     dots: true,
@@ -62,6 +19,14 @@ const ClientsReview = () => {
     slidesToShow: 3,
     slidesToScroll: 3,
   }
+
+  useEffect(() => {
+    (async () => {
+      const responseData = await feedbackService.getAllFeedbacks();
+      setReviews([...responseData]);
+      console.log('feedbacks', responseData);
+    })();
+  }, [setReviews]);
 
   return (
     <div>
@@ -73,20 +38,13 @@ const ClientsReview = () => {
           <Slider {...settings}>
             {reviews.map((review) => (
               <div className="box" key={review.id}>
-                <img src={placeholderImg} alt="" />
-                <h3>{review.name}</h3>
+                {review.patient.imageUrl !== null ? <img src={review.patient.imageUrl} alt="" /> : <img src={placeholderImg} alt="" />}
+                <h3>{review.patient.firstName} {review.patient.lastName}</h3>
                 <div className="stars">
-                  <i className="fas fa-star"></i>
-                  <i className="fas fa-star"></i>
-                  <i className="fas fa-star"></i>
-                  <i className="fas fa-star"></i>
-                  <i className="fas fa-star-half-alt"></i>
+               { [...Array(review.grade)].map((e, i) => <i className="fas fa-star" key={i}></i>)}
                 </div>
                 <p className="text">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid
-                  perspiciatis libero nobis rem numquam nesciunt alias sapiente
-                  minus voluptatem, reiciendis consequuntur optio dolorem!
+                  {review.comment}
                 </p>
               </div>
             ))}

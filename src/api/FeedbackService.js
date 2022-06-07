@@ -1,13 +1,13 @@
 import ApiService from "./ApiService";
 
 const ENDPOINTS = {
-  GET_ALL_FEEDBACKS: "/CheckUp/GetAllDoctors"
+  GET_ALL_FEEDBACKS: "/Feedback/GetAll"
 };
 
-class CheckUpService {
+class FeedbackService {
 
-  getAllDoctors = async () =>{
-    const response = await ApiService.get(ENDPOINTS.GET_ALL_DOCTORS,{
+  getAllFeedbacks = async () =>{
+    const response = await ApiService.get(ENDPOINTS.GET_ALL_FEEDBACKS,{
         headers: {
             'Authorization': `Bearer ${process.env.REACT_APP_TOKEN}`
           }
@@ -16,6 +16,6 @@ class CheckUpService {
   }
 }
 
-export const checkUpService = new CheckUpService();
+export const feedbackService = new FeedbackService();
 
 

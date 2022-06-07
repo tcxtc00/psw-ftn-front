@@ -40,6 +40,7 @@
     margin: auto;
     border-radius: 50%;
     object-fit: cover;
+    border: 6px solid #FFF;
 }
 
 .review .box-container .box h3{
