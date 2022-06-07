@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import api from '../../api/axios'
+import { checkUpService } from "../../api/CheckupService";
+
+import './myCheckups.css'
 
 import CheckUp from "../../components/CheckUp";
 
@@ -14,18 +16,27 @@ const MyCheckUps = () => {
     text: 'Check ups',
   })
 
+  // useEffect(() => {
+  //   const fetchCheckUps = async () => {
+  //     api.get("/CheckUp/GetPatientCheckUps/FutureCheckUps", {
+  //         headers: {
+  //           'Authorization': `Bearer ${process.env.REACT_APP_TOKEN}`
+  //         }
+  //     }).then(res => {
+  //       setCheckUps(res.data.data);
+  //     }).catch(err =>console.log(err));  
+  //   }
+  //   fetchCheckUps();
+  // }, []);
+
   useEffect(() => {
-    const fetchCheckUps = async () => {
-      api.get("/CheckUp/GetPatientCheckUps/FutureCheckUps", {
-        headers: {
-          'Authorization': `Bearer ${process.env.REACT_APP_TOKEN}`
-        }
-      }).then(res => {
-        setCheckUps(res.data.data);
-      }).catch(err =>console.log(err));  
-    }
-    fetchCheckUps();
-  }, []);
+    (async () => {
+      const responseCheckUps = await checkUpService.getFutureCheckUps();
+      setCheckUps([...responseCheckUps]);
+      console.log('futureCheckUps', responseCheckUps);
+    })();
+  }, [setCheckUps]);
+
 
   return (
     <>

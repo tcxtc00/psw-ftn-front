@@ -1,6 +1,6 @@
 import React from 'react';
 
-import api from '../api/axios'
+import api from '../api/ApiService'
 
 import '../pages/checkUps/checkups.css'
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './logInSignUp.css'
 import FormInput from './FormInput/FormInput'
-import axios from '../../api/axios'
+import ApiService from '../../api/ApiService'
 
 import React from 'react'
 
