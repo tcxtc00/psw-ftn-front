@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import './registration.css'
 import SignUp from '../../components/registrationComponents/SignUp'
 import LogIn from '../../components/registrationComponents/LogIn'
-import { ReactComponent as HomeImgSvg } from '../../assets/about-img.svg'
+//import { ReactComponent as HomeImgSvg } from '../../assets/about-img.svg'
 
 const Registration = () => {
   const [isSignUpForm, setIsSignUpForm] = useState(false)
@@ -23,21 +23,15 @@ const Registration = () => {
         <h3 className="heading">
           Welcome to <span>Greencare</span>
         </h3>
-        <HomeImgSvg />
+        <img src=""/>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure
-          ducimus, quod ex cupiditate ullam in assumenda maiores et culpa odit
-          tempora ipsam qui, quisquam quis facere iste fuga, minus nesciunt.
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure
-          ducimus, quod ex cupiditate ullam in assumenda maiores et culpa odit
-          tempora ipsam qui, quisquam quis facere iste fuga, minus nesciunt.
+        We understand that everyone is unique and every patient is different, that's what makes us different.
+        We've made it our Purpose to provide the best individualised specialist care for every patient we see. We want to help people feel better and recover faster.
+        We're part of Serbian's largest family-owned private hospital group with over 35 years experience in providing award winning, innovative, personalised medicine for a range of mental health and orthopaedics conditions.
         </p>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus vero
-          ipsam laborum porro voluptates voluptatibus a nihil temporibus
-          deserunt vel? Lorem ipsum dolor, sit amet consectetur adipisicing
-          elit. Natus vero ipsam laborum porro voluptates voluptatibus a nihil
-          temporibus deserunt vel?
+        We work as a team and are passionate about the health and wellbeing of our patients, supporting them every step of the way from treatment, rehabilitation, recovery and beyond.
+        Welcome to Greencare Clinic. Giving you fast access to world-class experts and care, when you need it most.
         </p>
       </div>
       <div className="right">

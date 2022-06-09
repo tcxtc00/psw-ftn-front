@@ -22,7 +22,7 @@ const LogIn = () => {
       type: 'email',
       placeholder: 'Email',
       errorMessage: 'It should be a valid email address!',
-      label: 'Email',
+    // label: 'Email',
       required: true,
     },
     {
@@ -31,7 +31,7 @@ const LogIn = () => {
       type: 'password',
       placeholder: 'Password',
       errorMessage: 'Please enter valid password!',
-      label: 'Password',
+    // label: 'Password',
       required: true,
     },
   ]

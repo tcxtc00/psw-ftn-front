@@ -23,7 +23,10 @@ const BookNow = () => {
           <form action="">
             <h3>See Available Check Ups</h3>
             <input type="text" placeholder="Doctor" className="box" />
-            <input type="number" placeholder="Priority" className="box" />
+            <select className='box' name="priority" id="priority">
+            <option value="Doctor">Doctor</option>
+            <option value="CheckUpTime">CheckUpTime</option>
+          </select>
             <input type="datetime-local" className="box" />
             <input type="datetime-local" className="box" />
             <input

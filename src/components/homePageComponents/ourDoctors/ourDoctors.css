@@ -22,6 +22,7 @@
 
 .doctors .box-container .box img{
     height: 20rem;
+    width: 20rem;
     border:var(--border);
     border-radius: .5rem;
     margin: auto;
