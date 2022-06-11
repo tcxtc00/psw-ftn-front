@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom';
+import CheckUp from '../../components/CheckUp'
 import './checkups.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { checkUpService } from '../../api/CheckupService'
 
 const CheckUps = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
+    console.log(state);
   }, [])
 
   // const checkUps = [
@@ -57,23 +62,29 @@ const CheckUps = () => {
   //   },
   // ]
 
+  const bookCheckUp = async(checkUpId) => {
+
+    const params = {
+      chechUpId: 9,
+      patientId: 3
+    }
+
+    const response = await checkUpService.bookCheckUp(params);
+    //toast(response.data.data.message);
+  }
+
   const [checkUps, setCheckUps] = useState([]);
+  //Used data of checkUpQuery that were send form bookNow component
+  const  {state}  = useLocation();
 
   const [title, setTitle] = useState({
     greenText: 'Available',
     text: 'Check ups',
   })
 
-  const params = {
-    doctorId: 2,
-    startIntervalTime: '2022-01-01',
-    endIntervalTime: '2022-11-25',
-    priority: "Doctor"
-  };
-
   useEffect(() => {
     (async () => {
-      const responseCheckUps = await checkUpService.getAvailableCheckUps(params);
+      const responseCheckUps = await checkUpService.getAvailableCheckUps(state);
       setCheckUps([...responseCheckUps]);
       console.log('futureCheckUps', responseCheckUps);
     })();
@@ -89,21 +100,10 @@ const CheckUps = () => {
         <span>{title.greenText}</span> {title.text}
       </h5>
       <div className="grid-container">
-        {checkUps.map((checkUp) => (
-          <form action="" key={checkUp.id}>
-            <h3>{checkUp.title}</h3>
-            <input
-              disabled={true}
-              type="text"
-              value = {`${checkUp.doctor.firstName} ${checkUp.doctor.lastName}`}
-              className="box"
-            />
-            <input disabled={true} type="datetime-local" className="box" value={checkUp.startTime}/>
-            <input disabled={true} type="datetime-local" className="box" value={checkUp.endTime}/>
-            <input disabled={true} type="datetime-local" className="box" value={checkUp.cancellationTime}/>
-            <input type="submit" value="Book Now" className="btn" />
-          </form>
-        ))}
+      {checkUps && checkUps.length > 0 ?
+        checkUps.map((item, index) => (
+        <CheckUp key={item.checkUpId} item={item} index = {index + 1} bookCheckUp={bookCheckUp} />
+      )) : null }
       </div>
     </>
   )

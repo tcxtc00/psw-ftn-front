@@ -16,18 +16,10 @@ const MyCheckUps = () => {
     text: 'Check ups',
   })
 
-  // useEffect(() => {
-  //   const fetchCheckUps = async () => {
-  //     api.get("/CheckUp/GetPatientCheckUps/FutureCheckUps", {
-  //         headers: {
-  //           'Authorization': `Bearer ${process.env.REACT_APP_TOKEN}`
-  //         }
-  //     }).then(res => {
-  //       setCheckUps(res.data.data);
-  //     }).catch(err =>console.log(err));  
-  //   }
-  //   fetchCheckUps();
-  // }, []);
+  const cancelCheckUp = async(checkUpId) => {
+    const canceledCheckUp = await checkUpService.cancelCheckUp(checkUpId);
+    console.log('canceledCheckUp', canceledCheckUp);
+  }
 
   useEffect(() => {
     (async () => {
@@ -37,7 +29,6 @@ const MyCheckUps = () => {
     })();
   }, [setCheckUps]);
 
-
   return (
     <>
     <h5 className="heading-checkup">
@@ -46,7 +37,7 @@ const MyCheckUps = () => {
     <div className="grid-container">
     {checkUps && checkUps.length > 0 ?
       checkUps.map((item, index) => (
-      <CheckUp key={item.checkUpId} item={item} index = {index + 1} />
+      <CheckUp key={item.checkUpId} item={item} index = {index + 1} cancelCheckUp={cancelCheckUp} />
     )) : null }
   </div>
   </>

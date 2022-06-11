@@ -3,16 +3,16 @@ import { useState } from 'react'
 import './logInSignUp.css'
 import FormInput from './FormInput/FormInput'
 import { useNavigate } from 'react-router-dom'
+import { authService } from '../../api/AuthService'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LogIn = () => {
   const navigate = useNavigate()
 
   const [values, setValues] = useState({
-    username: '',
     email: '',
-    birthday: '',
     password: '',
-    confirmPassword: '',
   })
 
   const inputs = [
@@ -26,7 +26,7 @@ const LogIn = () => {
       required: true,
     },
     {
-      id: 7,
+      id: 2,
       name: 'password',
       type: 'password',
       placeholder: 'Password',
@@ -37,9 +37,23 @@ const LogIn = () => {
   ]
 
   //da se ne bi refreshovala cela stranica
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
-    navigate('/')
+
+    try {
+      const response = await authService.login(values);
+      //console.log('Login response', response);
+      if(response.success)
+      {
+        navigate('/');
+        window.location.reload();
+      }
+      else{
+        //toast("Error credentials");
+      }
+    } catch(err){
+        console.log(err)
+    }  
   }
 
   const onChange = (e) => {

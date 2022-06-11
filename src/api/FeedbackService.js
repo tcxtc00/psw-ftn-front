@@ -1,4 +1,5 @@
 import ApiService from "./ApiService";
+import authHeader from "./AuthHeader";
 
 const ENDPOINTS = {
   GET_ALL_FEEDBACKS: "/Feedback/GetAll"
@@ -7,11 +8,7 @@ const ENDPOINTS = {
 class FeedbackService {
 
   getAllFeedbacks = async () =>{
-    const response = await ApiService.get(ENDPOINTS.GET_ALL_FEEDBACKS,{
-        headers: {
-            'Authorization': `Bearer ${process.env.REACT_APP_TOKEN}`
-          }
-    });
+    const response = await ApiService.get(ENDPOINTS.GET_ALL_FEEDBACKS,{headers: authHeader()});
     return response.data.data;
   }
 }

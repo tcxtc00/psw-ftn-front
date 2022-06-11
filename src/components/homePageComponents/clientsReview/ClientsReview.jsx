@@ -36,8 +36,8 @@ const ClientsReview = () => {
         </h1>
         <div className="box-container">
           <Slider {...settings}>
-            {reviews.map((review) => (
-              <div className="box" key={review.id}>
+            {reviews.map((review, index) => (
+              <div className="box" key={index}>
                 {review.patient.imageUrl !== null ? <img src={review.patient.imageUrl} alt="" /> : <img src={placeholderImg} alt="" />}
                 <h3>{review.patient.firstName} {review.patient.lastName}</h3>
                 <div className="stars">

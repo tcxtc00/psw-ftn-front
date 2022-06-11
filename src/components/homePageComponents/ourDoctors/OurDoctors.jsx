@@ -73,8 +73,8 @@ const OurDoctors = () => {
         </h1>
         <div className="box-container">
           <Slider {...settings}>
-            {doctors.map((doctor) => (
-              <div className="box" key={doctor.id}>
+            {doctors.map((doctor, index) => (
+              <div className="box" key={index}>
               {doctor.imageUrl !== null ? <img src={doctor.imageUrl} alt="" /> : <img src={placeholderImg} alt="" />}
                 <h3>{doctor.firstName} {doctor.lastName}</h3>
                 <span className="expertise-span">{doctor.expertise}</span>

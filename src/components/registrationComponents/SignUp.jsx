@@ -1,18 +1,20 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './logInSignUp.css'
 import FormInput from './FormInput/FormInput'
-import ApiService from '../../api/ApiService'
+import { authService } from '../../api/AuthService'
 
 import React from 'react'
 
 const SignUp = () => {
   const navigate = useNavigate()
 
+  const roleRef = useRef();
+
+  const [allRegisterValues, setAllRegisterValues] = useState(null);
+
   const [values, setValues] = useState({
-    username: '',
     email: '',
-    birthday: '',
     password: '',
     confirmPassword: '',
   })
@@ -20,33 +22,23 @@ const SignUp = () => {
   const roles = [
     {
       id: 0,
-      label: 'Select Role',
+      label: 'Patient',
+      role: 'Patient'
     },
     {
       id: 1,
-      label: 'Doctor',
+      label: 'Doctor Generalist',
+      expertise: 'Generalist',
+      role: 'Doctor'
     },
     {
       id: 2,
-      label: 'Patient',
+      label: 'Doctor Specialist',
+      expertise: 'Specialist',
+      role: 'Doctor'
     },
   ]
   const [pickedRole, setPickedRole] = useState()
-
-  const expertise = [
-    {
-      id: 0,
-      label: 'Select Expertise',
-    },
-    {
-      id: 1,
-      label: 'Generalist',
-    },
-    {
-      id: 2,
-      label: 'Specialist',
-    },
-  ]
 
   const inputs = [
     {
@@ -120,10 +112,33 @@ const SignUp = () => {
     },
   ]
 
-  //da se ne bi refreshovala cela stranica
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    navigate('/')
+
+    try {
+      var roleValue = roles[roleRef.current.value].role;
+      values["role"] = roleValue;
+      
+      if(roleValue !== 'Patient')
+      {
+        values["expertise"] = roles[roleRef.current.value].expertise;
+      }
+
+     console.log(values);
+      const response = await authService.register({...values});
+      
+      console.log('Register response', response);
+      if(response.success)
+      {
+        navigate('/');
+        window.location.reload();
+      }
+      else{
+        //toast("Error credentials");
+      }
+    } catch(err){
+        console.log(err)
+    }  
   }
 
   const onChange = (e) => {
@@ -135,7 +150,7 @@ const SignUp = () => {
   //   console.log(`Option selected:`, pickedRole)
   // }
 
-  return (
+  return ( 
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <h1 className="title">Sign Up</h1>
@@ -147,22 +162,13 @@ const SignUp = () => {
             onChange={onChange}
           />
         ))}
-        <div className="dropdown-container">
-          <select>
-            {roles.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
+          <select ref={roleRef} name="roleId" id="roleId" className='box'>
+            {roles.map((role,index) => (
+              <option key={index} value={index}>
+                {role.label}
               </option>
             ))}
           </select>
-          <select className="dropDown">
-            {expertise.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
         <button className="btn">Submit</button>
       </form>
     </div>
