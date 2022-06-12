@@ -11,8 +11,9 @@ import { checkUpService } from '../../api/CheckupService'
 const CheckUps = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
-    console.log(state);
   }, [])
+
+  const [response, setResponse] = useState(null);
 
   // const checkUps = [
   //   {
@@ -62,16 +63,18 @@ const CheckUps = () => {
   //   },
   // ]
 
-  const bookCheckUp = async(checkUpId) => {
-
-    const params = {
-      chechUpId: 9,
-      patientId: 3
+  const bookCheckUp = (checkUpId, patientId) => {
+    var params = {
+      checkUpId: checkUpId,
+      patientId: patientId
     }
-
-    const response = await checkUpService.bookCheckUp(params);
-    //toast(response.data.data.message);
-  }
+    return async(event) => {
+      event.preventDefault();
+      const res = await checkUpService.bookCheckUp(params);
+      setResponse(res);
+      //console(response.data.data.message);
+    }
+  };
 
   const [checkUps, setCheckUps] = useState([]);
   //Used data of checkUpQuery that were send form bookNow component
@@ -88,7 +91,7 @@ const CheckUps = () => {
       setCheckUps([...responseCheckUps]);
       console.log('futureCheckUps', responseCheckUps);
     })();
-  }, [setCheckUps]);
+  }, [setCheckUps, response]);
 
   // const changeTitleOnClick = () => {
   //   setIsSignUpForm((prevIsSignUpForm) => !prevIsSignUpForm)

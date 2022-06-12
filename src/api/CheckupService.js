@@ -38,8 +38,8 @@ class CheckUpService {
     return responseData.data;
   }
 
-  bookCheckUp = async ({params}) =>{
-    
+  bookCheckUp = async (params) =>{
+ 
   let responseData = null 
 
    await ApiService.put(ENDPOINTS.BOOK_CHECKUP, {...params}, {headers: authHeader()})

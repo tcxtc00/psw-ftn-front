@@ -11,14 +11,21 @@ import "../checkUps/checkups.css";
 const MyCheckUps = () => {
   const [checkUps, setCheckUps] = useState([]);
 
+  const [resCancelCheckUp, setResCancelCheckUp] = useState(null);
+
   const [title, setTitle] = useState({
     greenText: 'My',
     text: 'Check ups',
   })
 
-  const cancelCheckUp = async(checkUpId) => {
-    const canceledCheckUp = await checkUpService.cancelCheckUp(checkUpId);
-    console.log('canceledCheckUp', canceledCheckUp);
+  const cancelCheckUp = (checkUpId) => {
+
+    return async(event) => {
+      event.preventDefault();
+      const res = await checkUpService.cancelCheckUp(checkUpId);
+      setResCancelCheckUp(res);
+      //console.log('canceledCheckUp', res);
+    }
   }
 
   useEffect(() => {
@@ -27,7 +34,7 @@ const MyCheckUps = () => {
       setCheckUps([...responseCheckUps]);
       console.log('futureCheckUps', responseCheckUps);
     })();
-  }, [setCheckUps]);
+  }, [setCheckUps, resCancelCheckUp]);
 
   return (
     <>
