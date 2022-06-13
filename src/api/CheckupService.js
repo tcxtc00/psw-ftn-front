@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import ApiService from "./ApiService";
 import authHeader from "./AuthHeader";
 
@@ -35,7 +36,7 @@ class CheckUpService {
 
   cancelCheckUp = async (checkUpId) =>{
     const responseData =  await ApiService.put(`${ENDPOINTS.CANCEL_CHECKUP}${checkUpId}`, checkUpId, {headers: authHeader()})
-    return responseData.data;
+    return responseData;
   }
 
   bookCheckUp = async (params) =>{

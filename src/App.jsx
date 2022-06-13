@@ -10,6 +10,9 @@ import MyCheckUps from './pages/myCheckUps/MyCheckUps'
 import WithoutHeader from './components/WithoutHeader'
 import WithHeader from './components/WithHeader'
 
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 const App = () => {
   return (
     <div>
@@ -25,6 +28,7 @@ const App = () => {
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer autoClose={5000}  />
     </div>
   )
 }

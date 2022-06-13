@@ -13,7 +13,7 @@ const CheckUps = () => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
 
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState([]);
 
   // const checkUps = [
   //   {
@@ -68,6 +68,7 @@ const CheckUps = () => {
       checkUpId: checkUpId,
       patientId: patientId
     }
+    console.log(checkUpId);
     return async(event) => {
       event.preventDefault();
       const res = await checkUpService.bookCheckUp(params);
@@ -87,9 +88,20 @@ const CheckUps = () => {
 
   useEffect(() => {
     (async () => {
-      const responseCheckUps = await checkUpService.getAvailableCheckUps(state);
-      setCheckUps([...responseCheckUps]);
-      console.log('futureCheckUps', responseCheckUps);
+      //try{
+        const responseCheckUps = await checkUpService.getAvailableCheckUps(state);
+        if(responseCheckUps !== null)
+        {
+          setCheckUps([...responseCheckUps])
+        }
+        else {
+          setCheckUps([])
+        }
+       
+        console.log('futureCheckUps', responseCheckUps);
+      // }catch{
+      //     setCheckUps([]);
+      // }
     })();
   }, [setCheckUps, response]);
 

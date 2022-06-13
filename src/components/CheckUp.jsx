@@ -3,7 +3,6 @@ import React from 'react';
 import '../pages/checkUps/checkups.css'
 
 const CheckUp = ({ item: {doctor, startTime, endTime, cancellationTime, checkUpId}, index, cancelCheckUp, bookCheckUp}) => {
-  console.log(checkUpId);
 
   const user = JSON.parse(localStorage.getItem("user"));
   const patientId = user.data.userId;

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import { checkUpService } from "../../api/CheckupService";
-
 import './myCheckups.css'
-
 import CheckUp from "../../components/CheckUp";
-
 import "../checkUps/checkups.css";
+
+import {toast} from 'react-toastify'
 
 const MyCheckUps = () => {
   const [checkUps, setCheckUps] = useState([]);
@@ -22,8 +21,23 @@ const MyCheckUps = () => {
 
     return async(event) => {
       event.preventDefault();
-      const res = await checkUpService.cancelCheckUp(checkUpId);
-      setResCancelCheckUp(res);
+      try{
+        const res = await checkUpService.cancelCheckUp(checkUpId);
+        setResCancelCheckUp(res);
+        console.log(resCancelCheckUp);
+
+        if(resCancelCheckUp.success !== true)
+        {
+          toast.success("Success")
+        }
+        else {
+          toast.error(resCancelCheckUp.message)
+        }
+      }catch(err){
+        toast.error(err.response.data.message)
+        console.log(err.response.data)
+      }
+      // toast.success("Success");
       //console.log('canceledCheckUp', res);
     }
   }

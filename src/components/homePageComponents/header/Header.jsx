@@ -43,7 +43,7 @@ const Header = () => {
         <a href="/#book" onClick={onBookClick} className="book-btn">
           Book
         </a>
-        <a href="/my-check-ups">Check Ups</a>
+        <a href="/my-check-ups">My Check Ups</a>
         <a href="/#review" onClick={onReviewClick}>Review</a>
         <a href="" onClick={onLogout}>Logout</a>
       </nav>
