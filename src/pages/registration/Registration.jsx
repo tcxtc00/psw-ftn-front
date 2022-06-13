@@ -45,7 +45,7 @@ const Registration = () => {
           </p>
         ) : (
           <p>
-            Already have an account?
+            Don't have an account?
             <span onClick={changeFormOnClick} className="span-login-signup">
               Sign Up
             </span>
