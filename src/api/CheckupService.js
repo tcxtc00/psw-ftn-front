@@ -4,17 +4,23 @@ import authHeader from "./AuthHeader";
 
 const ENDPOINTS = {
   FUTURE_CHECKUPS: "/CheckUp/GetPatientCheckUps/FutureCheckUps",
-  HISTORY_CHECKUPS: "/",
+  HISTORY_CHECKUPS: "/CheckUp/GetPatientCheckUps/HistoryCheckUps",
   GET_ALL_DOCTORS: "/CheckUp/GetAllDoctors",
   GET_DOCTORS_BY_EXPERTISE: "/CheckUp/GetDoctorsByExpertise/?expertise=",
   GET_AVAILABLE_CHECKUPS: "/CheckUp/GetAvailableCheckUps",
   CANCEL_CHECKUP: "/CheckUp/Cancel?checkUpId=",
+  ADD_FEEDBACK: "/CheckUp/AddFeedback",
   BOOK_CHECKUP: "/CheckUp/Book"
 };
 
 class CheckUpService {
   getFutureCheckUps = async () =>{
     const response = await ApiService.get(ENDPOINTS.FUTURE_CHECKUPS, {headers: authHeader()});
+    return response.data.data;
+  }
+
+  getHistoryCheckUps = async () =>{
+    const response = await ApiService.get(ENDPOINTS.HISTORY_CHECKUPS, {headers: authHeader()});
     return response.data.data;
   }
 
@@ -36,6 +42,11 @@ class CheckUpService {
 
   cancelCheckUp = async (checkUpId) =>{
     const responseData =  await ApiService.put(`${ENDPOINTS.CANCEL_CHECKUP}${checkUpId}`, checkUpId, {headers: authHeader()})
+    return responseData;
+  }
+
+  rateCheckUp = async (params) =>{
+    const responseData =  await ApiService.post(ENDPOINTS.ADD_FEEDBACK, {...params}, {headers: authHeader()})
     return responseData;
   }
 

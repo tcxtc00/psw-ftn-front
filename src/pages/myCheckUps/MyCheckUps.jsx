@@ -10,13 +10,15 @@ import { toast } from 'react-toastify'
 
 const MyCheckUps = () => {
   const [checkUps, setCheckUps] = useState([])
+  const [historyCheckUps, setHistoryCheckUps] = useState([]);
 
   const [resCancelCheckUp, setResCancelCheckUp] = useState(null)
+  const [resGradeCheckUp, setResGradeCheckUp] = useState(null)
 
-  const [isHistoryCheckUps, setisHistoryCheckUps] = useState(false)
+  const [isHistoryCheckUps, setIsHistoryCheckUps] = useState(false)
 
   const changeCheckUpsOnClick = () => {
-    setisHistoryCheckUps((prevIsHistoryCheckUps) => !prevIsHistoryCheckUps)
+    setIsHistoryCheckUps((prevIsHistoryCheckUps) => !prevIsHistoryCheckUps)
   }
 
   const [title, setTitle] = useState({
@@ -31,12 +33,11 @@ const MyCheckUps = () => {
         const res = await checkUpService.cancelCheckUp(checkUpId)
         setResCancelCheckUp(res)
         console.log(resCancelCheckUp)
-
-        if (resCancelCheckUp.success !== true) {
-          toast.success('Success')
-        } else {
-          toast.error(resCancelCheckUp.message)
-        }
+        // if (resCancelCheckUp.success !== true) {
+        //   toast.success('Success')
+        // } else {
+        //   toast.error(resCancelCheckUp.message)
+        // }
       } catch (err) {
         toast.error(err.response.data.message)
         console.log(err.response.data)
@@ -46,6 +47,35 @@ const MyCheckUps = () => {
     }
   }
 
+  const rateCheckUp = (params) => {
+    return async (event) => {
+      event.preventDefault()
+      try {
+        const res = await checkUpService.rateCheckUp({...params})
+        setResGradeCheckUp(res)
+        console.log(resGradeCheckUp)
+
+      } catch (err) {
+        toast.error(err.response.data.message)
+        console.log(err.response.data)
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (!isHistoryCheckUps) {
+      setTitle({
+        greenText: 'History',
+        text: 'Check ups',
+      })
+    } else {
+      setTitle({
+        greenText: 'My',
+        text: 'Check ups',
+      })
+    }
+  }, [isHistoryCheckUps])
+
   useEffect(() => {
     ;(async () => {
       const responseCheckUps = await checkUpService.getFutureCheckUps()
@@ -54,15 +84,22 @@ const MyCheckUps = () => {
     })()
   }, [setCheckUps, resCancelCheckUp])
 
+  useEffect(() => {
+    ;(async () => {
+      const responseCheckUps = await checkUpService.getHistoryCheckUps()
+      setHistoryCheckUps([...responseCheckUps])
+      console.log('historyCheckUps', responseCheckUps)
+    })()
+  }, [setHistoryCheckUps, resGradeCheckUp])
+
   return (
     <>
       <h5 className="heading-checkup">
         <span>{title.greenText}</span> {title.text}
       </h5>
-      <p
-        onClick={changeCheckUpsOnClick}
-        className="span-login-signup"
-      >History Check ups</p>
+      <p onClick={changeCheckUpsOnClick} className="span-login-signup center">
+        {isHistoryCheckUps === true ? 'History Check ups' : 'My Check ups'}
+      </p>
       <div className="grid-container">
         {isHistoryCheckUps === true ? (
           checkUps && checkUps.length > 0 ? (
@@ -76,7 +113,15 @@ const MyCheckUps = () => {
             ))
           ) : null
         ) : (
-          <RateCheckUp />
+          historyCheckUps && historyCheckUps.length > 0 ? 
+          historyCheckUps.map((item,index) => (
+            <RateCheckUp
+              key={item.checkUpId}
+              item={item}
+              index={index + 1}
+              rateCheckUp={rateCheckUp}
+            />
+          )) : null          
         )}
       </div>
     </>
