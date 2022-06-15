@@ -1,0 +1,60 @@
+
+.box-review{
+    width: 100%;
+    height: 100%;
+    margin:.7rem 0;
+    border-radius: .5rem;
+    border:var(--border);
+    font-size: 1.6rem;
+    color: var(--black);
+    text-transform: none;
+    padding: 1rem;
+}
+
+.box-selector{
+    width: 100%;
+    height: 4.7rem;
+    margin:.7rem 0;
+    border-radius: .5rem;
+    border:var(--border);
+    font-size: 1.6rem;
+    color: var(--black);
+    text-transform: none;
+    padding: 1rem;
+}
+
+.label{
+    width: 100%;
+    content: attr(value);
+    padding:10px;
+    margin:0 0 10px;
+    display:block; 
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.heading-feedback{
+    text-align: center;
+    padding-bottom: 2rem;
+    text-shadow: var(--text-shadow);
+    text-transform: uppercase;
+    color:var(--black);
+    font-size: 3.3rem;
+    letter-spacing: .4rem;
+}
+
+.heading-feedback span{
+    font-size: 3.3rem;
+    display: inline;
+    text-transform: uppercase;
+    color:var(--green);
+}
+
+.textarea-feedback{
+ width: 100%;   
+ height: 150px;
+}
