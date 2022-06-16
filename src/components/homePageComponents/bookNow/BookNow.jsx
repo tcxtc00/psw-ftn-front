@@ -7,7 +7,10 @@ import { ReactComponent as BookImg } from '../../../assets/book-img.svg'
 const BookNow = () => {
   const navigate = useNavigate();
 
-  const [generalists, setGeneralists] = useState([])
+  const user = JSON.parse(localStorage.getItem("user"));
+  const role = user.data.role;
+
+  const [doctors, setDoctors] = useState([])
 
   const priorities = [
     {
@@ -38,14 +41,21 @@ const BookNow = () => {
 
   useEffect(() => {
     (async () => {
-      const expertise = {
-        expertise: "Generalist"
+      var expertise = null;
+      if(role === 'Doctor')
+      {
+        expertise =  "Specialist"
       }
-      const generalists = await checkUpService.getDoctorsByExpertise(expertise);
-      setGeneralists([...generalists]);
-      console.log('generalists', generalists);
+      else if(role === 'Patient')
+      {
+        expertise =  "Generalist"
+      }
+
+      const doctors = await checkUpService.getDoctorsByExpertise(expertise);
+      setDoctors([...doctors]);
+      console.log('doctors', doctors);
     })();
-  }, [setGeneralists]);
+  }, [setDoctors]);
 
   return (
     <div>
@@ -60,7 +70,7 @@ const BookNow = () => {
           <form>
             <h3>See Available Check Ups</h3>
             <select ref={doctorIdRef} name="doctorId" id="doctorId" className='box'>
-            {generalists.map((doctor) => (
+            {doctors.map((doctor) => (
               <option key={doctor.userId} value={doctor.userId}>{doctor.firstName} {doctor.lastName}</option>
             ))}
             </select>

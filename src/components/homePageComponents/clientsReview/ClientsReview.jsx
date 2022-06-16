@@ -13,6 +13,9 @@ const ClientsReview = () => {
   const [reviews, setReviews] = useState([])
   const [isOpen, setIsOpen] = useState(false)
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const role = user.data.role;
+
   const settings = {
     dots: true,
     infinite: false,
@@ -83,6 +86,7 @@ const ClientsReview = () => {
             ))}
           </Slider>
         </div>
+        {role === "Patient" ? 
         <div className="center">
         <a className="btn margin-btn" onClick={() => setIsOpen(true)}>
           Leave Feedback <span className="fas fa-chevron-right"></span>
@@ -93,6 +97,7 @@ const ClientsReview = () => {
           leaveFeedback={leaveFeedback}>
         </ModalFeedback>
       </div>
+      : null}
       </section>
     </div>
   )

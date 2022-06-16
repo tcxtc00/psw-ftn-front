@@ -7,6 +7,9 @@ const Header = () => {
 
   const navigate = useNavigate()
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const role = user.data.role;
+
   const onLogout = (e) => {
     e.preventDefault()
     authService.logout();
@@ -43,7 +46,8 @@ const Header = () => {
         <a href="/#book" onClick={onBookClick} className="book-btn">
           Book
         </a>
-        <a href="/my-check-ups">My Check Ups</a>
+        { role === "Doctor"? null : <a href="/my-check-ups">My Check Ups</a>}
+        { role === "Doctor"? <a href="/pharmacy">Pharmacy</a> : null}
         <a href="/#review" onClick={onReviewClick}>Review</a>
         <a href="" onClick={onLogout}>Logout</a>
       </nav>

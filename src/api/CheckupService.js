@@ -6,6 +6,7 @@ const ENDPOINTS = {
   FUTURE_CHECKUPS: "/CheckUp/GetPatientCheckUps/FutureCheckUps",
   HISTORY_CHECKUPS: "/CheckUp/GetPatientCheckUps/HistoryCheckUps",
   GET_ALL_DOCTORS: "/CheckUp/GetAllDoctors",
+  GET_ALL_PATIENTS: "/CheckUp/GetAllPatients",
   GET_DOCTORS_BY_EXPERTISE: "/CheckUp/GetDoctorsByExpertise/?expertise=",
   GET_AVAILABLE_CHECKUPS: "/CheckUp/GetAvailableCheckUps",
   CANCEL_CHECKUP: "/CheckUp/Cancel?checkUpId=",
@@ -29,8 +30,13 @@ class CheckUpService {
     return response.data.data;
   }
 
-  getDoctorsByExpertise = async (params) =>{
-    const response = await ApiService.get(`${ENDPOINTS.GET_DOCTORS_BY_EXPERTISE}${params.expertise}`, {headers: authHeader()});
+  getAllPatients = async () =>{
+    const response = await ApiService.get(ENDPOINTS.GET_ALL_PATIENTS, {headers: authHeader()});
+    return response.data.data;
+  }
+
+  getDoctorsByExpertise = async (expertise) =>{
+    const response = await ApiService.get(`${ENDPOINTS.GET_DOCTORS_BY_EXPERTISE}${expertise}`, {headers: authHeader()});
     return response.data.data;
   }
 
