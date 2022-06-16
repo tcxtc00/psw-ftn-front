@@ -13,6 +13,10 @@ import { useNavigate } from 'react-router-dom'
 const HomePage = () => {
 
   const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  var role = user.data.role;
+  var expertise = user.data.expertise;
   
   useEffect(() => {
     if(authService.getCurrentUser() === null)
@@ -20,6 +24,7 @@ const HomePage = () => {
       navigate("/registration");
       window.location.reload();
     }
+    
   }, []);
 
   return (
@@ -28,7 +33,8 @@ const HomePage = () => {
       <OurServices />
       <About />
       <OurDoctors />
-      <BookNow />
+      {role === 'Doctor' && expertise === 'Specialist' ?
+      null : <BookNow />}
       <ClientsReview />
       <Footer />
     </div>
