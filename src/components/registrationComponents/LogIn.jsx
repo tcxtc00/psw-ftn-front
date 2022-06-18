@@ -46,7 +46,7 @@ const LogIn = () => {
       if(res.status === 200)
       {
         localStorage.setItem("user", JSON.stringify(res.data));
-        navigate('/');
+        navigate('/home');
         window.location.reload();
       }
     } catch(err){

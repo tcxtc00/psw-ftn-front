@@ -130,7 +130,7 @@ const SignUp = () => {
       console.log('Register response', response);
       if(response.success)
       {
-        navigate('/');
+        navigate('/home');
         window.location.reload();
       }
       else{

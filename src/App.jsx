@@ -26,13 +26,14 @@ const App = () => {
             <Route path="/registration" element={<Registration />} />
           </Route>
           <Route element={<WithHeader />}>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<HomePage />} />
             <Route path="/check-ups" element={<CheckUps />} />
             <Route path="/my-check-ups" element={<MyCheckUps />} />
             <Route path="/pharmacy" element={<Pharmacy />} />
             <Route path="/users" element={<Users />} />
             <Route path="/admin-review" element={<AdminReview/>} />
           </Route>
+          <Route path='*' element={<Registration/>}/>
         </Routes>
       </BrowserRouter>
       <ToastContainer autoClose={5000}  />
