@@ -1,11 +1,12 @@
 import React from 'react'
 import './NoData.css'
+import noDataImg from '../../assets/empty.png';
 
-const NoData = (text) => {
+const NoData = ({text}) => {
   return (
-    <div>
-        <img alt={"empty"} className="center" height={100} width={100}/> 
-        <p>{text}</p>
+    <div className='center-empty'>
+        <img alt={"empty"} src={noDataImg} className="empty-img"/> 
+        <p className='text-empty'>{text}</p>
     </div>
   )
 }

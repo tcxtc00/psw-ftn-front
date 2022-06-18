@@ -1,6 +1,5 @@
-.grid-container {
+.grid-container-checkup {
     max-width: 1200px;
-    margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 100px;
     display: grid;
@@ -9,10 +8,10 @@
     justify-content: center;
     align-content: center;
 }
-.grid-container > h1 {
+.grid-container-checkup > h1 {
     color: var(--green);
 }
-.grid-container > form {
+.grid-container-checkup > form {
     flex:1 1 45rem;
     width: 100%;
     background: #fff;
@@ -23,13 +22,13 @@
     border-radius: .5rem;
 }
 
-.grid-container > form > h3{
+.grid-container-checkup > form > h3{
     color:var(--black);
     padding-bottom: 1rem;
     font-size: 1.3rem;
 }
 
-.grid-container > form .box{
+.grid-container-checkup > form .box{
     width: 100%;
     margin:.7rem 0;
     border-radius: .5rem;
@@ -40,11 +39,11 @@
     padding: 1rem;
 }
 
-.grid-container > form .btn{
+.grid-container-checkup > form .btn{
     padding:1rem 4rem;
 }
 
-.grid-container > div > h3{
+.grid-container-checkup > div > h3{
     color:var(--black);
     padding-bottom: 1rem;
     font-size: 1.7rem;

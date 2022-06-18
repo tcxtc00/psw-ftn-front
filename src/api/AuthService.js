@@ -25,21 +25,22 @@ const ENDPOINTS = {
 
     login = async (params) =>{
 
-        // const response = ApiService.post(ENDPOINTS.LOGIN, {...params});
+         const response = ApiService.post(ENDPOINTS.LOGIN, {...params});
+         return response;
         // return JSON.stringify(response.data);
 
-        const response = await ApiService.post(ENDPOINTS.LOGIN, {...params})
-        .then((response) => {
-        if (response.data.data) {
-             localStorage.setItem("user", JSON.stringify(response.data));
-             //console.log(localStorage);
-            }
-        return response.data
-      }).catch(error => {
-        return error.message;
-      });
+      //   const response = await ApiService.post(ENDPOINTS.LOGIN, {...params})
+      //   .then((response) => {
+      //   if (response.data.data) {
+      //        localStorage.setItem("user", JSON.stringify(response.data));
+      //        //console.log(localStorage);
+      //       }
+      //   return response.data
+      // }).catch(error => {
+      //   return error.message;
+      // });
 
-      return response;
+      //return response;
     }
 
     logout = () => {

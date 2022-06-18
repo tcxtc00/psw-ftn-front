@@ -1,3 +1,7 @@
+.book{
+    padding-bottom: 4rem;
+}
+
 .book .row{
     display: flex;
     align-items: center;

@@ -6,12 +6,15 @@ import './clientsReview.css'
 import placeholderImg from '../../../assets/user-placeholder.png'
 import ModalFeedback from './modalFeedback/ModalFeedback'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 import { feedbackService } from '../../../api/FeedbackService'
 
 const ClientsReview = () => {
   const [reviews, setReviews] = useState([])
   const [isOpen, setIsOpen] = useState(false)
+
+  const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
   const role = user.data.role;
@@ -51,6 +54,15 @@ const ClientsReview = () => {
         console.log(err.response.data)
       }
     }
+  }
+
+  const manageFeedback = () => {
+    
+    navigate('/admin-review',{
+      state: {
+        reviews: reviews,
+      }
+    });
   }
 
   return (
@@ -98,6 +110,12 @@ const ClientsReview = () => {
         </ModalFeedback>
       </div>
       : null}
+
+      {role === "Admin" ? <div className="center">
+      <a className="btn margin-btn" onClick={manageFeedback}>
+        Manage Feedbacks <span className="fas fa-chevron-right"></span>
+      </a>
+    </div> : null}
       </section>
     </div>
   )

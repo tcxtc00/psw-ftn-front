@@ -1,0 +1,38 @@
+.grid-container-reviews {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    justify-content: center;
+    align-content: center;
+}
+
+.text-comment{
+    margin-top: 3rem;
+    font-size: 15px;
+}
+
+.text-container{
+    width: 100%;
+    height: 17rem;
+}
+
+.heading-reviews{
+    font-size: 4rem;
+    margin-top: 8rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    text-shadow: var(--text-shadow);
+    text-transform: uppercase;
+    color:var(--black);
+    letter-spacing: .4rem;
+}
+
+.heading-reviews span{
+    font-size: 4rem;
+    display: inline;
+    text-transform: uppercase;
+    color:var(--green);
+}

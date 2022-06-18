@@ -12,14 +12,14 @@ const BookNow = () => {
 
   const [doctors, setDoctors] = useState([])
 
-  const priorities = [
+  const [priorities, setPriorities] = useState ([
     {
       value: "Doctor" 
     },
     {
       value: "CheckUpTime"
     }
-  ]
+  ])
 
   const doctorIdRef = useRef();
   const startIntervalTimeRef = useRef();
@@ -45,10 +45,12 @@ const BookNow = () => {
       if(role === 'Doctor')
       {
         expertise =  "Specialist"
+        setPriorities([{value: "Doctor"} ])
       }
       else if(role === 'Patient')
       {
         expertise =  "Generalist"
+        setPriorities([{value: "Doctor"}, {value:"CheckUpTime"}])
       }
 
       const doctors = await checkUpService.getDoctorsByExpertise(expertise);
@@ -69,17 +71,21 @@ const BookNow = () => {
           </div>
           <form>
             <h3>See Available Check Ups</h3>
+            <label>Doctor</label>
             <select ref={doctorIdRef} name="doctorId" id="doctorId" className='box'>
             {doctors.map((doctor) => (
               <option key={doctor.userId} value={doctor.userId}>{doctor.firstName} {doctor.lastName}</option>
             ))}
             </select>
+            <label>Priority</label>
             <select ref={priorityRef} name="priority" className='box'>
             {priorities.map((priority) => (
               <option key={priority.value} value={priority.value}>{priority.value}</option>
             ))}
             </select>
+            <label>Date From</label>
             <input ref={startIntervalTimeRef} placeholder="Start Interval Time" type="datetime-local" className="box" />
+            <label>Date To</label>
             <input ref={endIntervalTimeRef} placeholder="End Interval Time" type="datetime-local" className="box" />
             <input
               type="submit"

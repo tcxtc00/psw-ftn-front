@@ -5,6 +5,7 @@ import './myCheckups.css'
 import CheckUp from '../../components/CheckUp'
 import '../checkUps/checkups.css'
 import RateCheckUp from '../../components/myCheckUpsComponents/RateCheckUp'
+import NoData from '../../components/shared/NoData'
 
 import { toast } from 'react-toastify'
 
@@ -31,19 +32,17 @@ const MyCheckUps = () => {
       event.preventDefault()
       try {
         const res = await checkUpService.cancelCheckUp(checkUpId)
-        setResCancelCheckUp(res)
         console.log(resCancelCheckUp)
-        // if (resCancelCheckUp.success !== true) {
-        //   toast.success('Success')
-        // } else {
-        //   toast.error(resCancelCheckUp.message)
-        // }
+
+        if(res.status === 200)
+        {
+          toast.success("Success")
+          setResCancelCheckUp(res)
+        }
       } catch (err) {
-        toast.error(err.response.data.message)
+        toast.error(`${err.response.status}: ${err.response.data.message}`)
         console.log(err.response.data)
       }
-      // toast.success("Success");
-      //console.log('canceledCheckUp', res);
     }
   }
 
@@ -52,11 +51,16 @@ const MyCheckUps = () => {
       event.preventDefault()
       try {
         const res = await checkUpService.rateCheckUp({...params})
-        setResGradeCheckUp(res)
         console.log(resGradeCheckUp)
 
+        if(res.status === 200)
+        {
+          toast.success("Success")
+          setResGradeCheckUp(res)
+        }
+
       } catch (err) {
-        toast.error(err.response.data.message)
+        toast.error(`${err.response.status}: ${err.response.data.message}`)
         console.log(err.response.data)
       }
     }
@@ -100,30 +104,29 @@ const MyCheckUps = () => {
       <p onClick={changeCheckUpsOnClick} className="span-login-signup center">
         {isHistoryCheckUps === true ? 'History Check ups' : 'My Check ups'}
       </p>
-      <div className="grid-container">
-        {isHistoryCheckUps === true ? (
-          checkUps && checkUps.length > 0 ? (
-            checkUps.map((item, index) => (
-              <CheckUp
-                key={item.checkUpId}
-                item={item}
-                index={index + 1}
-                cancelCheckUp={cancelCheckUp}
-              />
-            ))
-          ) : null
-        ) : (
-          historyCheckUps && historyCheckUps.length > 0 ? 
-          historyCheckUps.map((item,index) => (
-            <RateCheckUp
+      {isHistoryCheckUps === true && (checkUps && checkUps.length > 0) ?
+      <div className="grid-container-checkup">
+          {checkUps.map((item, index) => (
+            <CheckUp
               key={item.checkUpId}
               item={item}
               index={index + 1}
-              rateCheckUp={rateCheckUp}
+              cancelCheckUp={cancelCheckUp}
             />
-          )) : null          
-        )}
-      </div>
+          ))}
+      </div> : isHistoryCheckUps === true ? <NoData text="You don't have any Check Ups" /> : null } 
+
+      {isHistoryCheckUps === false && (historyCheckUps && historyCheckUps.length > 0) ?
+        <div className="grid-container-checkup">
+            {historyCheckUps.map((item,index) => (
+              <RateCheckUp
+                key={item.checkUpId}
+                item={item}
+                index={index + 1}
+                rateCheckUp={rateCheckUp}
+              />
+            ))}
+        </div> :  isHistoryCheckUps === false ?  <NoData text="You don't have any Check Ups in History" /> : null} 
     </>
   )
 }

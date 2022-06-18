@@ -45,18 +45,34 @@ const RateCheckUp = ({ item: {doctor, startTime, endTime, checkUpId, historyChec
     <form>
     {historyCheckUp ? <div className="rate-stars">{[...Array(historyCheckUp.grade)].map((e, i) => <i className="fas fa-star" key={i}></i>)}</div>
     : <h3>Rate Check up</h3>}
-      <input value={`${doctor.firstName} ${doctor.lastName}`} disabled="true" className="box" />
-      <input value={startTime} disabled="true" className="box" />
-      <input value={endTime} disabled="true" className="box" />
+      <label>Doctor</label>
+      <input value={`${doctor.firstName} ${doctor.lastName}`} disabled={true} className="box" />
+      <label>Start Time</label>
+      <input value={startTime} disabled={true} className="box" />
+      <label>End Time</label>
+      <input value={endTime} disabled={true} className="box" />
       {historyCheckUp ? null
-      : <select ref={gradeRef} onChange={getGradeFromSelect} name="Grade" className='box'>
+      :
+      <div> 
+      <label>Grade</label>
+      <select ref={gradeRef} onChange={getGradeFromSelect} name="Grade" className='box'>
         {grades.map((grade) => (
         <option key={grade.value} value={grade.value}>{grade.label}</option>
       ))}
       </select>
+      </div>
       }
-      {historyCheckUp ? <textarea value={historyCheckUp.comment} disabled="true" placeholder="Comment" className="box" /> 
-      : <textarea ref={commentRef} placeholder="Comment" type="textarea"  className="box" onChange={getCommentFromInput}/> }
+      {historyCheckUp ? 
+      
+      <div>  
+      <label>Comment</label>  
+      <textarea value={historyCheckUp.comment} disabled={true} placeholder="Comment" className="box" /> 
+      </div>
+      :
+      <div> 
+      <label>Comment</label> 
+      <textarea ref={commentRef} placeholder="Comment" type="textarea"  className="box" onChange={getCommentFromInput}/>
+      </div> }
       
       {historyCheckUp ? null : <input
         type="submit"

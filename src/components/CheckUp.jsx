@@ -37,16 +37,23 @@ const CheckUp = ({ item: {doctor, startTime, endTime, cancellationTime, checkUpI
   return (
     <form action="" key={checkUpId}>
     <h3>Check up {index}</h3>
-    <p className='box'>{doctor.firstName} {doctor.lastName}</p>
-    {role === 'Doctor' ?  
+    <label>Doctor</label>
+    <input disabled={true} className='box' value={`${doctor.firstName} ${doctor.lastName}`}/>
+    {role === 'Doctor' ?
+    <div>
+    <label>Patient</label>  
     <select ref={patientIdRef} onChange={getPatientIdFromSelect} name="patientId" id="patientId" className='box'>
     {patients.map((patient) => (
       <option key={patient.userId} value={patient.userId}>{patient.firstName} {patient.lastName}</option>
     ))}
-    </select> : null}
-    <p className='box'>{startTime}</p>
-    <p className='box'>{endTime}</p>
-    <p className='box'>{cancellationTime}</p>
+    </select> 
+    </div> : null}
+    <label>Start Time</label>
+    <input disabled={true} className='box' value={startTime}/>
+    <label>End Time</label>
+    <input disabled={true} className='box' value={endTime}/>
+    <label>Cancellation Time</label>
+    <input disabled={true} className='box' value={cancellationTime}/>
     {cancelCheckUp ? <input type="submit" value="Cancel" className="btn" onClick={cancelCheckUp(checkUpId)}/> 
     : <input type="submit" value="Book" className="btn" onClick= {bookCheckUp(checkUpId, patientId)}/>
     }

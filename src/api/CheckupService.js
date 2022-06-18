@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import ApiService from "./ApiService";
 import authHeader from "./AuthHeader";
 
@@ -57,16 +56,8 @@ class CheckUpService {
   }
 
   bookCheckUp = async (params) =>{
- 
-  let responseData = null 
-
-   await ApiService.put(ENDPOINTS.BOOK_CHECKUP, {...params}, {headers: authHeader()})
-    .then(response =>  responseData = response.data)
-    .catch(error => {
-        console.error(error.response.data.message, error);
-        responseData = error;
-    });
-    return responseData.data;
+  const responseData = await ApiService.put(ENDPOINTS.BOOK_CHECKUP, {...params}, {headers: authHeader()})
+  return responseData;
   }
 }
 

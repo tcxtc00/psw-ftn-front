@@ -7,44 +7,6 @@ import placeholderImg from '../../../assets/user-placeholder.png'
 import { checkUpService } from '../../../api/CheckupService'
 
 const OurDoctors = () => {
-  // const doctors = [
-  //   {
-  //     id: 0,
-  //     expertise: 'Specialist Doctor',
-  //     name: 'Nada Macura',
-  //     img: doctor1,
-  //   },
-  //   {
-  //     id: 1,
-  //     expertise: 'Generalist Doctor',
-  //     name: 'Miodrag Petrovic',
-  //     img: doctor2,
-  //   },
-  //   {
-  //     id: 2,
-  //     expertise: 'Generalist Doctor',
-  //     name: 'Branimir Nestorovic',
-  //     img: doctor3,
-  //   },
-  //   {
-  //     id: 3,
-  //     expertise: 'Specialist Doctor',
-  //     name: 'Zeljko Mitrovic',
-  //     img: doctor4,
-  //   },
-  //   {
-  //     id: 4,
-  //     expertise: 'Generalist Doctor',
-  //     name: 'John Deo',
-  //     img: doctor5,
-  //   },
-  //   {
-  //     id: 5,
-  //     expertise: 'Generalist Doctor',
-  //     name: 'Ryan Target',
-  //     img: doctor6,
-  //   },
-  // ]
 
   const [doctors, setDoctors] = useState([]);
 

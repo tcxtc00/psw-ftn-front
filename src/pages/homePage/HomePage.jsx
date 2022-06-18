@@ -33,7 +33,7 @@ const HomePage = () => {
       <OurServices />
       <About />
       <OurDoctors />
-      {role === 'Doctor' && expertise === 'Specialist' ?
+      { role === 'Admin' || (role === 'Doctor' && expertise === 'Specialist') ?
       null : <BookNow />}
       <ClientsReview />
       <Footer />

@@ -4,7 +4,7 @@ import './logInSignUp.css'
 import FormInput from './FormInput/FormInput'
 import { useNavigate } from 'react-router-dom'
 import { authService } from '../../api/AuthService'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const LogIn = () => {
@@ -39,22 +39,22 @@ const LogIn = () => {
   //da se ne bi refreshovala cela stranica
   const handleSubmit = async(e) => {
     e.preventDefault()
-
     try {
-      const response = await authService.login(values);
-      //console.log('Login response', response);
-      if(response.success)
+      const res = await authService.login(values);
+      console.log('Login response', res);
+
+      if(res.status === 200)
       {
+        localStorage.setItem("user", JSON.stringify(res.data));
         navigate('/');
         window.location.reload();
       }
-      else{
-        //toast("Error credentials");
-      }
     } catch(err){
-        console.log(err)
+      toast.error(`${err.response.status}: ${err.response.data.message}`)
+      console.log(err.response.data)
     }  
   }
+
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })

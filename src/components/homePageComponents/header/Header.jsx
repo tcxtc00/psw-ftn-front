@@ -28,6 +28,9 @@ const Header = () => {
   const onBookClick = (e) => {
     navigate('/#book')
   }
+  const onUsersClick = (e) => {
+    navigate('/#users')
+  }
   const onReviewClick = (e) => {
     navigate('/#review')
   }
@@ -43,10 +46,9 @@ const Header = () => {
         <a href="/#services" onClick={onServicesClick}>Services</a>
         <a href="/#about" onClick={onAboutClick}>About</a>
         <a href="/#doctors" onClick={onDoctorsClick}>Doctors</a>
-        <a href="/#book" onClick={onBookClick} className="book-btn">
-          Book
-        </a>
-        { role === "Doctor"? null : <a href="/my-check-ups">My Check Ups</a>}
+        { role !== "Admin" ? <a href="/#book" onClick={onBookClick}> Book</a> : null }
+        { role === "Admin" ? <a href="/users" onClick={onUsersClick}> Users</a> : null }
+        { role === "Doctor" || role === "Admin" ? null : <a href="/my-check-ups">My Check Ups</a>}
         { role === "Doctor"? <a href="/pharmacy">Pharmacy</a> : null}
         <a href="/#review" onClick={onReviewClick}>Review</a>
         <a href="" onClick={onLogout}>Logout</a>
