@@ -80,7 +80,7 @@ const GetMedicine = () => {
             className="box"
             onChange={getQuantityFromInput}
           />
-          <label>Response from Pharmacy</label>
+          <label>Message from Pharmacy</label>
           <textarea
            id='response'
            disabled={true}
