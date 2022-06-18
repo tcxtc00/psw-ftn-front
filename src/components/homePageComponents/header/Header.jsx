@@ -16,41 +16,49 @@ const Header = () => {
     navigate('/registration')
   }
 
-  const onServicesClick = (e) => {
-    navigate('/#services')
+  const onHomeClick = () => {
+    navigate('/home/#home')
   }
-  const onAboutClick = (e) => {
-    navigate('/#about')
+
+  const onServicesClick = () => {
+    navigate('/home/#services')
   }
-  const onDoctorsClick = (e) => {
-    navigate('/#doctors')
+  const onAboutClick = () => {
+    navigate('/home/#about')
   }
-  const onBookClick = (e) => {
-    navigate('/#book')
+  const onDoctorsClick = () => {
+    navigate('/home/#doctors')
   }
-  const onUsersClick = (e) => {
-    navigate('/#users')
+  const onBookClick = () => {
+    navigate('/home/#book')
   }
-  const onReviewClick = (e) => {
-    navigate('/#review')
+  const onUsersClick = () => {
+    navigate('/home/#users')
+  }
+  const onReviewClick = () => {
+    navigate('/home/#review')
+  }
+
+  const onLogoClick = () => {
+    navigate('/home/#home')
   }
 
   return (
     <header className="header">
-      <a href="#" className="logo">
+      <a href="/home/#home" onClick={onLogoClick} className="logo">
         <i className="fas fa-heartbeat"></i> Greencare.
       </a>
 
       <nav className="navbar">
-        <a href="/#home">Home</a>
-        <a href="/#services" onClick={onServicesClick}>Services</a>
-        <a href="/#about" onClick={onAboutClick}>About</a>
-        <a href="/#doctors" onClick={onDoctorsClick}>Doctors</a>
-        { role !== "Admin" ? <a href="/#book" onClick={onBookClick}> Book</a> : null }
+        <a  href="/home/#home" onClick={onHomeClick}>Home</a>
+        <a href="/home/#services" onClick={onServicesClick}>Services</a>
+        <a href="/home/#about" onClick={onAboutClick}>About</a>
+        <a href="/home/#doctors" onClick={onDoctorsClick}>Doctors</a>
+        { role !== "Admin" ? <a href="/home/#book" onClick={onBookClick}> Book</a> : null }
         { role === "Admin" ? <a href="/users" onClick={onUsersClick}> Users</a> : null }
         { role === "Doctor" || role === "Admin" ? null : <a href="/my-check-ups">My Check Ups</a>}
         { role === "Doctor"? <a href="/pharmacy">Pharmacy</a> : null}
-        <a href="/#review" onClick={onReviewClick}>Review</a>
+        <a href="/home/#review" onClick={onReviewClick}>Review</a>
         <a href="" onClick={onLogout}>Logout</a>
       </nav>
 
