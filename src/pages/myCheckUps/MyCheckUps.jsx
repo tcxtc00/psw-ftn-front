@@ -16,7 +16,7 @@ const MyCheckUps = () => {
   const [resCancelCheckUp, setResCancelCheckUp] = useState(null)
   const [resGradeCheckUp, setResGradeCheckUp] = useState(null)
 
-  const [isHistoryCheckUps, setIsHistoryCheckUps] = useState(false)
+  const [isHistoryCheckUps, setIsHistoryCheckUps] = useState(true)
 
   const changeCheckUpsOnClick = () => {
     setIsHistoryCheckUps((prevIsHistoryCheckUps) => !prevIsHistoryCheckUps)

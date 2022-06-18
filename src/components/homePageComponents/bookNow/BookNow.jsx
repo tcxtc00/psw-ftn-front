@@ -69,7 +69,7 @@ const BookNow = () => {
           <div className="image">
             <BookImg />
           </div>
-          <form>
+          <form onSubmit={onSubmit}>
             <h3>See Available Check Ups</h3>
             <label>Doctor</label>
             <select ref={doctorIdRef} name="doctorId" id="doctorId" className='box'>
@@ -84,14 +84,14 @@ const BookNow = () => {
             ))}
             </select>
             <label>Date From</label>
-            <input ref={startIntervalTimeRef} placeholder="Start Interval Time" type="datetime-local" className="box" />
+            <input ref={startIntervalTimeRef} placeholder="Start Interval Time" type="datetime-local" className="box" required />
             <label>Date To</label>
-            <input ref={endIntervalTimeRef} placeholder="End Interval Time" type="datetime-local" className="box" />
+            <input ref={endIntervalTimeRef} placeholder="End Interval Time" type="datetime-local" className="box" required />
             <input
               type="submit"
               value="Book Now"
               className="btn"
-              onClick={onSubmit}
+              //onClick={onSubmit}
             />
           </form>
         </div>
